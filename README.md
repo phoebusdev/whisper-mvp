@@ -2,13 +2,18 @@
 
 An anonymous partner feedback platform that allows users to share reviews through a standardized form system.
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/phoebusdev/whisper-mvp&project-name=whisper-mvp&repository-name=whisper-mvp)
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/phoebusdev/whisper-mvp)
 
-## 🚀 Quick Links
+## 🚀 Quick Deploy
 
-- **[Deploy to Production NOW →](./DEPLOY_NOW.md)** - Get your app live in 5-10 minutes
+- **[Deploy to Vercel →](./DEPLOY_VERCEL.md)** - Deploy with Vercel + Postgres (10 minutes)
+- **[Deploy to Railway →](./DEPLOY_NOW.md)** - Deploy with Railway + SQLite (5 minutes)
+
+## 📚 Documentation
+
 - **[Quick Start Guide →](./QUICKSTART.md)** - Run locally in 2 minutes
-- **[Deployment Guide →](./DEPLOYMENT.md)** - Detailed deployment instructions
+- **[All Deployment Options →](./DEPLOYMENT.md)** - Railway, Render, Fly.io guides
 
 ## Features
 
