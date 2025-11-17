@@ -2,6 +2,14 @@
 
 An anonymous partner feedback platform that allows users to share reviews through a standardized form system.
 
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/phoebusdev/whisper-mvp)
+
+## 🚀 Quick Links
+
+- **[Deploy to Production NOW →](./DEPLOY_NOW.md)** - Get your app live in 5-10 minutes
+- **[Quick Start Guide →](./QUICKSTART.md)** - Run locally in 2 minutes
+- **[Deployment Guide →](./DEPLOYMENT.md)** - Detailed deployment instructions
+
 ## Features
 
 - 🔒 **Completely Anonymous** - No email or phone number required
