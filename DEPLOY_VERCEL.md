@@ -1,8 +1,11 @@
 # 🚀 Deploy Whisper to Vercel
 
 **Estimated Time: 10-15 minutes**
+**Updated: November 17, 2025**
 
-This guide will deploy your Whisper MVP to Vercel with Vercel Postgres database.
+This guide will deploy your Whisper MVP to Vercel with **Neon Postgres** (via Vercel Marketplace).
+
+> **Note:** As of 2025, Vercel no longer offers built-in Postgres. They now partner with Neon to provide PostgreSQL databases. Your code is fully compatible!
 
 ---
 
@@ -72,30 +75,36 @@ Click **"Deploy"**
 
 ---
 
-### Step 3: Add Vercel Postgres Database
+### Step 3: Add Neon Postgres Database
 
-#### A. Create Database
+#### A. Create Database (via Vercel Marketplace)
 
 1. Go to your project dashboard on Vercel
-2. Click "Storage" tab
-3. Click "Create Database"
-4. Select "Postgres"
-5. Choose a name: `whisper-db`
-6. Select region closest to your users
-7. Click "Create"
+2. Click **"Storage"** tab
+3. Click **"Create"**
+4. Select **"Neon Postgres"** (Vercel-Managed Integration)
+5. Configure:
+   - Database name: `whisper-db`
+   - Region: Choose closest to your users
+6. Click **"Create"**
 
-#### B. Connect Database
+**What happens:**
+- Vercel provisions a Neon Postgres database
+- Billing managed through Vercel
+- Free tier: 0.5 GB storage included
+
+#### B. Auto-Configuration
 
 Vercel automatically adds these environment variables to your project:
-- `POSTGRES_URL`
-- `POSTGRES_PRISMA_URL`
-- `POSTGRES_URL_NON_POOLING`
+- `POSTGRES_URL` (pooled connection - use this)
+- `POSTGRES_URL_NON_POOLING` (direct connection)
+- `POSTGRES_PRISMA_URL` (for Prisma ORM)
 - `POSTGRES_USER`
 - `POSTGRES_HOST`
 - `POSTGRES_PASSWORD`
 - `POSTGRES_DATABASE`
 
-**No manual configuration needed!** The database is now connected.
+**No manual configuration needed!** The database is connected via Neon's infrastructure.
 
 #### C. Redeploy
 
@@ -168,22 +177,26 @@ After deployment, add Postgres database via the dashboard.
 
 ---
 
-## 📊 Vercel vs SQLite Differences
+## 📊 Vercel + Neon vs SQLite (Railway)
 
 **Previous Setup (Railway/Render):**
-- Used SQLite database
+- Used SQLite database (file-based)
 - Single server with filesystem
+- Simple but limited scaling
 
-**New Setup (Vercel):**
-- Uses Vercel Postgres (PostgreSQL)
-- Serverless functions (scalable)
-- No server management needed
+**New Setup (Vercel + Neon):**
+- Uses Neon Postgres (managed PostgreSQL)
+- Serverless functions (auto-scaling)
+- Neon provides database infrastructure
+- Vercel handles billing and integration
 
 **Benefits:**
-- ✅ Auto-scaling
-- ✅ Global CDN
-- ✅ Managed database
+- ✅ Auto-scaling (both functions and database)
+- ✅ Global CDN via Vercel Edge Network
+- ✅ Managed database with automatic backups
+- ✅ Serverless architecture (pay per use)
 - ✅ Zero configuration SSL
+- ✅ Preview deployments with database branches
 - ✅ Automatic deployments on git push
 
 ---
@@ -298,9 +311,11 @@ View serverless function logs:
 **Error:** "Failed to connect to database"
 
 **Solution:**
-1. Verify Postgres database is created
-2. Check environment variables in Project Settings
-3. Redeploy after adding database
+1. Verify Neon Postgres is created in Storage tab
+2. Check environment variables in Project Settings → Environment Variables
+3. Look for `POSTGRES_URL` variable
+4. Redeploy after adding database
+5. Check function logs for initialization errors
 
 ### CORS Issues
 
@@ -318,15 +333,21 @@ If issues persist, check browser console for specific error.
 
 ## 💾 Database Management
 
-### View Database Data
+### View Database Data (Neon Console)
 
+**Option 1: Via Vercel**
 1. Go to Storage → whisper-db
-2. Click "Data" tab
-3. Browse tables: profiles, reviews, categories
+2. Click "Manage Neon Database" (opens Neon console)
+3. Browse tables in SQL Editor
+
+**Option 2: Direct Neon Console**
+1. Visit https://console.neon.tech
+2. Select your project
+3. Go to SQL Editor or Tables view
 
 ### Run SQL Queries
 
-In the Data tab:
+In Neon SQL Editor:
 ```sql
 -- View all profiles
 SELECT * FROM profiles;
@@ -345,10 +366,11 @@ GROUP BY profile_id;
 
 ### Database Backups
 
-Vercel Postgres automatically backs up your database:
-- Daily automatic backups
-- Point-in-time recovery
-- Download backups from dashboard
+Neon automatically backs up your database:
+- **Point-in-time recovery** (PITR)
+- Restore to any point in last 7 days (Free tier)
+- Longer retention on Pro tier
+- Managed entirely by Neon
 
 ---
 
